@@ -1,0 +1,29 @@
+
+{
+    "name": "partberlin/attributeunits",
+    "description": "Attribute units for Magento2",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "require": {
+        "php": "~5.6.0|~7.0.0"
+    },
+    "require-dev": {
+    },
+    "type": "magento2-module",
+    "scripts": {
+        "test": "phpunit"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Part\\AttributeUnits\\": ""
+        }
+    }
+}
