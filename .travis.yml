@@ -1,0 +1,31 @@
+dist: trusty
+
+language: php
+
+sudo: false
+
+php:
+    - 5.6
+    - 7.0
+
+env:
+    global:
+        - secure: "q7f7jOmzjrSB258vs4x3n3Qmo9Mw62uEp7ZumtvZCMthOBQ4Pwopi9GIjVACFp1xygi1NeDNaAUqWaPZqDXgKqi2tMYsS2cqHEEHPetP23RXjROeH+hBsZx/ROTBzavuEyGIggdAy0xWpgjZE7gAsR0grJxrbYry4OrKiL7bxLQCByC4b7Lu79gIc2eZ1EOpE7hUj7kFS26SDJ+hkQ6pby/Qn5CUrDVrvzw+yaB1eeeZMs5Rkerv7EZc5fWnhlF0fK8m4n3leYPS8cXHImiFhaWaAKOky1ngaM+Bv6tNfDUmWw+p1KDenUInAFJ5OF8bu9L2oDjnB+6o7wPQyFus7YMEcEs4SadUwpvz30QOQ8XbnAwrSGQ73MFPU/khmrcpcb2W0O+fpKnwXt94OQ/xfFaJkeK5M0SNpPEJ5kMm7xIU64upzySBjEF99u3htBs+aB7q7CB6/u0A9Fnyg4xBi2fi42DBy3vs63LMQEj7eSIo/qvqmUjugvGMugacAFDPI4Pg/UCclcbrPuy0849IM48ND8Iorxg8odtB7iRP+F9tel49NiU87dLChdRq6S1q7bJgSxboY6ax4ResZZXPHDrXUoHhYif7qw2btv/yXOj4f4Lv1TJnK3AGWgSJYVC96Qbys1hP68H3U6H1V/3Zo0W6pi1olzwo4hJDtuAMbYo="
+        - secure: "YV0OfALP1msLRSuh37O1EoKah4oewBU4w9nd96e7FghAwTbOTOblUFlsKoUmfTF0/laJi68V+rMcK9Y/9LmItG8zZ+I+oZNMQm84k/F3m6oDffiLFtO02pJMe62QuAkVEJaRgEdkEKZZxe679Wbk5nltiOAJZ6IMUuDoK0lldLN5DbIscpap2lXYa8SqWTVaFygkMoj6+ZZse0BTzTGArPCU4bRMr2elkPRGtJqYo0q+1gFi/k9G9IVPP6hyixMmU+tjBgCUy+61KkltKXYyintV9Xg0m0HbjZDBKSUysyTsItlohehoRTaPucnjV0jO3pYBNu8KrjlZZzH5SCVUIQKdfXzM5xSCopWY6dcUDz5GCkDjyI2geDcrsNDsAoODtGU05wLBfO5sK85ctRX/GgLXHPUV4Da+tHOSlQXIqO9Sa7aFUtK0Cxw/IHYMU7Ol9WfZhmWVJVenHLdGC7ed4N5kWX3ndl2Qrh2gka9k6GxAqaVMexK4IobKg5WFy/cm8FaC9cHTeUIT1Vxy4u6rbYOaqDoIAT4w869FdRqnGDL8C3W0e5LGZaEHUck5/GUOwNzzkpe0Dq0foiqLqdqISJhsRSDvujhHrCLj7y3GqZS3ASAxwuOIyqltOogJgnkR71DkI1vYx0FKdqBWB3rgDyxLYY7bZ9xR8e0MN3aRCYE="
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+install:
+    - echo '{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}' > auth.json"
+    - composer install --prefer-dist"
+
+script:
+    - php vendor/bin/phpcs"
+    - php vendor/bin/phpmd Observer/,Test/ text cleancode,codesize,controversial,design,naming,unusedcode"
+    - php vendor/bin/phpcpd Observer/ Test/"
+    - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
+
+after_script:
+    - php vendor/bin/coveralls"

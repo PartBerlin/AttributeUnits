@@ -15,4 +15,9 @@
     <testsuite name="Part_AttributeUnits Unit Tests">
         <directory suffix="Test.php">Test/Unit</directory>
     </testsuite>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./Observer</directory>
+        </whitelist>
+    </filter>
 </phpunit>

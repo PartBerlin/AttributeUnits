@@ -8,6 +8,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Part_Units',
+    'Part_AttributeUnits',
     __DIR__
 );

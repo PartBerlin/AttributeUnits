@@ -6,6 +6,22 @@
 
 Attribute units for Magento2.
 
+## Install
+
+* Add the repository to the repositories section of your composer.json file
+```
+ "repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:PartBerlin/AttributeUnits.git"
+    }
+ ],
+```
+* Require the module & install
+```
+ composer require partberlin/attributeunits:dev-master
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
