@@ -18,14 +18,14 @@ cache:
         - $HOME/.composer/cache
 
 install:
-    - echo '{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}' > auth.json"
-    - composer install --prefer-dist"
+    - echo '{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}' > auth.json
+    - composer install --prefer-dist
 
 script:
-    - php vendor/bin/phpcs"
+    - php vendor/bin/phpcs
     - php vendor/bin/phpmd Observer/,Test/ text cleancode,codesize,controversial,design,naming,unusedcode
-    - php vendor/bin/phpcpd Observer/ Test/"
-    - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
+    - php vendor/bin/phpcpd Observer/ Test/
+    - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
     - php vendor/bin/coveralls"
