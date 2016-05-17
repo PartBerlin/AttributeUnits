@@ -11,17 +11,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     public function assembleAdditionalDataEavAttribute(\Magento\Catalog\Model\ResourceModel\Eav\Attribute $attribute)
     {
-        $initialAdditionalData = [];
+        $iniAdditionalData = [];
         $additionalData = (string) $attribute->getData('additional_data');
         if (!empty($additionalData)) {
             $additionalData = unserialize($additionalData);
             if (is_array($additionalData)) {
-                $initialAdditionalData = $additionalData;
+                $iniAdditionalData = $additionalData;
             }
         }
-        $initialAdditionalData[\Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY] =
+        $iniAdditionalData[\Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY] =
             $attribute->getData(\Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY);
-        $attribute->setData('additional_data', serialize($initialAdditionalData));
+        $attribute->setData('additional_data', serialize($iniAdditionalData));
 
         return $this;
     }
