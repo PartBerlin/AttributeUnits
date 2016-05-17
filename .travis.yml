@@ -23,8 +23,8 @@ install:
 
 script:
     - php vendor/bin/phpcs
-    - php vendor/bin/phpmd Observer/,Test/ text cleancode,codesize,controversial,design,naming,unusedcode
-    - php vendor/bin/phpcpd Observer/ Test/
+    - php vendor/bin/phpmd Helper/,Model/,Observer/,Test/ text cleancode,codesize,controversial,design,naming,unusedcode
+    - php vendor/bin/phpcpd Helper/ Model/ Observer/ Test/
     - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:

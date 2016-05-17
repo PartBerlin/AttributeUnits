@@ -29,7 +29,7 @@ class AddFieldsToAttributeObserver implements ObserverInterface
         $form = $observer->getForm();
         $fieldset = $form->getElement('front_fieldset');
         $fieldset->addField(
-            'attribute_unit',
+            \Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY,
             'text',
             [
                 'name' => 'attribute_unit',
