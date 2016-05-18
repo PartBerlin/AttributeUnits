@@ -23,15 +23,20 @@ class Output
         $this->localeResolver = $localeResolver;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function beforeProcess(\Magento\Catalog\Helper\Output $outputHelper, $method, $result, $params)
     {
-        $productAttributeMethod = 'productAttribute';
-        if ($method === $productAttributeMethod &&
-            !in_array($this, $outputHelper->getHandlers($productAttributeMethod))) {
-            $outputHelper->addHandler($productAttributeMethod, $this);
+        $prodAttributeMethod = 'productAttribute';
+        if ($method === $prodAttributeMethod && !in_array($this, $outputHelper->getHandlers($prodAttributeMethod))) {
+            $outputHelper->addHandler($prodAttributeMethod, $this);
         }
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function productAttribute(\Magento\Catalog\Helper\Output $outputHelper, $result, $params)
     {
         $attribute = $this->eavConfig->getAttribute(\Magento\Catalog\Model\Product::ENTITY, $params['attribute']);
