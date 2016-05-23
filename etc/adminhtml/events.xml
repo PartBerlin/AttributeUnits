@@ -8,6 +8,9 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_catalog_product_attribute_edit_frontend_prepare_form">
+        <observer name="fill_unit_field" instance="Part\AttributeUnits\Observer\AddAdditionalValuesToAttributeObserver" />
+    </event>
     <event name="product_attribute_form_build_front_tab">
         <observer name="add_unit_field_to_attribute" instance="Part\AttributeUnits\Observer\AddFieldsToAttributeObserver" />
     </event>
