@@ -52,8 +52,8 @@ class OutputTest extends \PHPUnit_Framework_TestCase
         $this->outputHandler = $objectManager->getObject(
             'Part\AttributeUnits\Helper\Plugin\Output',
             [
-                $this->eavConfigMock,
-                $this->localeResolverMock,
+                'eavConfig' => $this->eavConfigMock,
+                'localeResolver' => $this->localeResolverMock,
             ]
         );
     }
@@ -78,6 +78,41 @@ class OutputTest extends \PHPUnit_Framework_TestCase
         $this->outputHandler->beforeProcess($this->outputHelperMock, $method, null, null);
     }
 
+    /**
+     * @dataProvider dataProductAttribute
+     */
+    public function testProductAttribute($result, array $params, array $additionalData, $locale, $expectedResult)
+    {
+        $attributeMock = $this->getMock(
+            '\Magento\Catalog\Model\ResourceModel\Eav\Attribute',
+            ['getId', 'getAdditionalData'],
+            [],
+            '',
+            false
+        );
+        $attributeMock
+            ->expects($this->once())
+            ->method('getId')
+            ->willReturn(5);
+        $attributeMock
+            ->expects($this->once())
+            ->method('getAdditionalData')
+            ->willReturn(serialize($additionalData));
+        $this->eavConfigMock
+            ->expects($this->once())
+            ->method('getAttribute')
+            ->with(\Magento\Catalog\Model\Product::ENTITY, $params['attribute'])
+            ->willReturn($attributeMock);
+        $this->localeResolverMock
+            ->expects($this->any())
+            ->method('getLocale')
+            ->willReturn($locale);
+        $this->assertSame(
+            $expectedResult,
+            $this->outputHandler->productAttribute($this->outputHelperMock, $result, $params)
+        );
+    }
+
     public function dataBeforeProcess()
     {
         return [
@@ -98,6 +133,40 @@ class OutputTest extends \PHPUnit_Framework_TestCase
                 1,
                 false,
                 1,
+            ],
+        ];
+    }
+
+    public function dataProductAttribute()
+    {
+        return [
+            [
+                1.2,
+                ['attribute' => 'weight'],
+                [],
+                'de_DE',
+                1.2,
+            ],
+            [
+                1.2,
+                ['attribute' => 'weight'],
+                ['attribute_unit' => 'mm'],
+                'de_DE',
+                '1,20 mm',
+            ],
+            [
+                1.564,
+                ['attribute' => 'weight'],
+                ['attribute_unit' => 'mm'],
+                'en_US',
+                '1.564 mm',
+            ],
+            [
+                11236.5,
+                ['attribute' => 'weight'],
+                ['attribute_unit' => 'mm'],
+                'en_US',
+                '11,236.50 mm',
             ],
         ];
     }
