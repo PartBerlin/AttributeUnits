@@ -4,7 +4,11 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-coverall]][link-coveralls]
 
-Attribute units for Magento2.
+A simple Magento 2 module that adds a text field `Attribute unit` to the tab `Storefront Properties` of
+`Attribute Information` in the admin area. The content of this text field will be added after the formated value of the
+attribute, when this attribute is rendered in frontend.
+For example the value `12345.6` with the unit `mm` will be rendered to `12.345,60 mm` in german stores or `12,345.60 mm`
+in english stores.
 
 ## Install
 
@@ -19,7 +23,7 @@ Attribute units for Magento2.
 ```
 * Require the module & install
 ```
- composer require partberlin/attributeunits:dev-master
+ composer require partberlin/module-attributeunits:dev-master
 ```
 
 ## Change log
