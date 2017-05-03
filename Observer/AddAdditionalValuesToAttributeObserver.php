@@ -33,7 +33,7 @@ class AddAdditionalValuesToAttributeObserver implements ObserverInterface
             if (isset($additionalData[Unit::ATTRIBUTE_UNIT_INPUT_KEY])) {
                 $attribute->setData(Unit::ATTRIBUTE_UNIT_INPUT_KEY, $additionalData[Unit::ATTRIBUTE_UNIT_INPUT_KEY]);
             }
-            if (isset($additionalData[Unit::ATTRIBUTE_DECIMAL_PLACES])) { echo 'YOYOYOY';
+            if (isset($additionalData[Unit::ATTRIBUTE_DECIMAL_PLACES])) {
                 $attribute->setData(Unit::ATTRIBUTE_DECIMAL_PLACES, $additionalData[Unit::ATTRIBUTE_DECIMAL_PLACES]);
             }
         }
