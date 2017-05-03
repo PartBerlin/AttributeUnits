@@ -4,11 +4,11 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-coverall]][link-coveralls]
 
-A simple Magento 2 module that adds a text field `Attribute unit` to the tab `Storefront Properties` of
-`Attribute Information` in the admin area. The content of this text field will be added after the formated value of the
-attribute, when this attribute is rendered in frontend.
-For example the value `12345.6` with the unit `mm` will be rendered to `12.345,60 mm` in german stores or `12,345.60 mm`
-in english stores.
+A simple Magento 2 module that adds the text field `Attribute unit` and `Attribute Decimal Places` to the tab
+`Storefront Properties` of `Attribute Information` in the admin area. The content of those text fields will be added
+after the formated value of the attribute, when this attribute is rendered in frontend.
+For example the value `12345.6` with the unit `mm` and decimal places `3` will be rendered to `12.345,600 mm` in german
+stores or `12,345.600 mm` in english stores.
 
 ## Install
 
