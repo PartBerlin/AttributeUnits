@@ -38,5 +38,15 @@ class AddFieldsToAttributeObserver implements ObserverInterface
                 'note' => __('The unit that will be shown in frontend'),
             ]
         );
+        $fieldset->addField(
+            \Part\AttributeUnits\Model\Unit::ATTRIBUTE_DECIMAL_PLACES,
+            'text',
+            [
+                'name' => 'attribute_decimal_places',
+                'label' => __('Attribute Decimal Places'),
+                'title' => __('Attribute Decimal Places'),
+                'note' => __('The number of decimal places shown in frontend'),
+            ]
+        );
     }
 }

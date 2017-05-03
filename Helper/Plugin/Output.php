@@ -44,9 +44,13 @@ class Output
             $additionalData = unserialize($attribute->getAdditionalData());
             if (is_array($additionalData) &&
                 isset($additionalData[Unit::ATTRIBUTE_UNIT_INPUT_KEY]) &&
-                $additionalData[Unit::ATTRIBUTE_UNIT_INPUT_KEY]) {
+                    $additionalData[Unit::ATTRIBUTE_UNIT_INPUT_KEY]) {
+                $decimalPlaces = 2;
+                if (isset($additionalData[Unit::ATTRIBUTE_DECIMAL_PLACES])) {
+                    $decimalPlaces = (int) $additionalData[Unit::ATTRIBUTE_DECIMAL_PLACES];
+                }
                 $numberFormatter = new \NumberFormatter($this->localeResolver->getLocale(), \NumberFormatter::DECIMAL);
-                $numberFormatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, 2);
+                $numberFormatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $decimalPlaces);
                 $result = sprintf(
                     "%s %s",
                     $numberFormatter->format($result),

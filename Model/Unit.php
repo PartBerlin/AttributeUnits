@@ -10,4 +10,5 @@ namespace Part\AttributeUnits\Model;
 class Unit
 {
     const ATTRIBUTE_UNIT_INPUT_KEY = 'attribute_unit';
+    const ATTRIBUTE_DECIMAL_PLACES = 'attribute_decimal_places';
 }

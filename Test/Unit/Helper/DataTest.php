@@ -29,15 +29,16 @@ class DataTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataAssembleAdditionalDataEavAttribute
      */
-    public function testAssembleAdditionalDataEavAttribute($additionData, $unit, $expectedSetData)
+    public function testAssembleAdditionalDataEavAttribute($additionData, $unit, $decimalPlaces, $expectedSetData)
     {
         $this->attributeMock
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(3))
             ->method('getData')
             ->will($this->returnValueMap(
                 [
                     ['additional_data', null, serialize($additionData)],
                     ['attribute_unit', null, $unit],
+                    ['attribute_decimal_places', null, $decimalPlaces],
                 ]
             ));
         $this->attributeMock
@@ -53,17 +54,20 @@ class DataTest extends \PHPUnit_Framework_TestCase
             [
                 [],
                 'cm',
-                ['attribute_unit' => 'cm'],
+                '3',
+                ['attribute_unit' => 'cm', 'attribute_decimal_places' => '3'],
             ],
             [
                 ['foo' => 'bar'],
                 'cm',
-                ['foo' => 'bar', 'attribute_unit' => 'cm'],
+                '4',
+                ['foo' => 'bar', 'attribute_unit' => 'cm', 'attribute_decimal_places' => '4'],
             ],
             [
-                ['foo' => 'bar', 'attribute_unit' => 'm'],
+                ['foo' => 'bar', 'attribute_unit' => 'm', 'attribute_decimal_places' => '3'],
                 'cm',
-                ['foo' => 'bar', 'attribute_unit' => 'cm'],
+                '5',
+                ['foo' => 'bar', 'attribute_unit' => 'cm', 'attribute_decimal_places' => '5'],
             ],
         ];
     }

@@ -54,26 +54,38 @@ class AddFieldsToAttributeObserverTest extends \PHPUnit_Framework_TestCase
             ->method('isOutputEnabled')
             ->willReturn($isOutputEnabled);
         $this->eventObserverMock
-            ->expects($this->exactly($methodCallCount))
+            ->expects($this->exactly((int) $isOutputEnabled))
             ->method('getForm')
             ->willReturn($this->formMock);
         $element = $this->getMock('Magento\Framework\Data\Form\Element\AbstractElement', [], [], '', false);
         $this->formMock
-            ->expects($this->exactly($methodCallCount))
+            ->expects($this->exactly((int) $isOutputEnabled))
             ->method('getElement')
             ->with('front_fieldset')
             ->willReturn($element);
         $element->expects($this->exactly($methodCallCount))
             ->method('addField')
             ->with(
-                'attribute_unit',
+                $this->logicalOr($this->equalTo('attribute_unit'), $this->equalTo('attribute_decimal_places')),
                 'text',
-                [
-                    'name' => 'attribute_unit',
-                    'label' => __('Attribute unit'),
-                    'title' => __('Attribute unit'),
-                    'note' => __('The unit that will be shown in frontend'),
-                ]
+                $this->logicalOr(
+                    $this->equalTo(
+                        [
+                            'name' => 'attribute_unit',
+                            'label' => __('Attribute unit'),
+                            'title' => __('Attribute unit'),
+                            'note' => __('The unit that will be shown in frontend'),
+                        ]
+                    ),
+                    $this->equalTo(
+                        [
+                            'name' => 'attribute_decimal_places',
+                            'label' => __('Attribute Decimal Places'),
+                            'title' => __('Attribute Decimal Places'),
+                            'note' => __('The number of decimal places shown in frontend'),
+                        ]
+                    )
+                )
             );
         $this->observer->execute($this->eventObserverMock);
     }
@@ -87,7 +99,7 @@ class AddFieldsToAttributeObserverTest extends \PHPUnit_Framework_TestCase
             ],
             [
                 true,
-                1,
+                2,
             ],
         ];
     }

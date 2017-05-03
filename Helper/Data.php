@@ -21,6 +21,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
         $iniAdditionalData[\Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY] =
             $attribute->getData(\Part\AttributeUnits\Model\Unit::ATTRIBUTE_UNIT_INPUT_KEY);
+        $iniAdditionalData[\Part\AttributeUnits\Model\Unit::ATTRIBUTE_DECIMAL_PLACES] =
+            $attribute->getData(\Part\AttributeUnits\Model\Unit::ATTRIBUTE_DECIMAL_PLACES);
         $attribute->setData('additional_data', serialize($iniAdditionalData));
 
         return $this;
